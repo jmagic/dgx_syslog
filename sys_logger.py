@@ -2,9 +2,11 @@
 LOG_FILE = 'yourlogfile.log'
 HOST, PORT = "0.0.0.0", 514
  
-DGX_IP = '192.168.2.12'
-YOUR_MACHINE_IP='192.168.2.225'
-YOUR_MACHINE_MAC='5C:26:0A:48:93:7F'
+DGX_IP = '192.168.7.92'
+DGX_SYSTEM = '5002:3:0'
+YOUR_MACHINE_IP='192.168.7.104'
+YOUR_MACHINE_MAC='F4:6D:04:1B:BA:31'
+#'5C:26:0A:48:93:7F'
 
 import logging
 import SocketServer
@@ -12,21 +14,28 @@ import telnetlib
 
 
 telnet_session = telnetlib.Telnet(DGX_IP, 23, 5)
-#print "starting telnet", telnet_session.read_very_eager()
-telnet_session.write('send_command 5002:3:2, \"$03\" \r')
-#print telnet_session.read_very_eager()
-telnet_session.write('send_command 5002:3:2, \"\'set BCPU_syslog_enabled=ON\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'set BCPU_syslog_server_ip_address=' + YOUR_MACHINE_IP + '\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'set BCPU_syslog_server_mac_address=' + YOUR_MACHINE_MAC + '\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'su\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'enova\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'12amx34\', $0D\" \r') 
-telnet_session.write('send_command 5002:3:2, \"\'remote BCPU1\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'|\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'d\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'1\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'1\', $0D\" \r')
-telnet_session.write('send_command 5002:3:2, \"\'a\', $0D\" \r')
+print "starting telnet"
+print telnet_session.read_until('Welcome', 5)
+#print telnet_session.read_all()
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"$03\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_enabled=ON\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_server_ip_address=' + YOUR_MACHINE_IP + '\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_server_mac_address=' + YOUR_MACHINE_MAC + '\', $0D\" \r')
+print telnet_session.read_until('mac_address', 5)
+print "set of syslog complete"
+print "move on?", raw_input()
+print telnet_session.read_very_eager()
+raw_input()
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'su\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'enova\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'12amx34\', $0D\" \r') 
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'remote BCPU1\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'|\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'d\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'1\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'1\', $0D\" \r')
+telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'b\', $0D\" \r')
+print telnet_session.read_very_eager()
 
 logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='', filename=LOG_FILE, filemode='a')
  
