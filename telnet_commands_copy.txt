@@ -1,0 +1,27 @@
+telnet
+send_command 5002:3:1, "$03"
+send_command 5002:3:1, "'set BCPU_syslog_enabled=ON', $0D"
+send_command 5002:3:1, "$03"
+send_command 5002:3:1, "'bcs', $0D"
+
+send_command 5002:3:1, "'set BCPU_syslog_server_ip_address=192.168.7.104', $0D"
+send_command 5002:3:1, "'set BCPU_syslog_server_mac_address=f4:6d:04:1b:ba:31', $0D"
+
+send_command 5002:3:1, "'set BCPU_syslog_server_mac_address=00:00:00:00:00:00', $0D"
+
+send_command 5002:3:1, "$03"
+send_command 5002:3:1, "'su', $0D"
+send_command 5002:3:1, "'enova'"
+send_command 5002:3:1, "'12amx34'"
+send_command 5002:3:1, "$03"
+send_command 5002:3:1, "'remote BCPU1', $0D"
+send_command 5002:3:1, "|"
+
+send_command 5002:3:1, "'d', $0D"
+send_command 5002:3:1, "'1', $0D"
+send_command 5002:3:1, "'1', $0D"
+send_command 5002:3:1, "'b', $0D"
+
+
+
+send_command 5002:3:0, "'|', $0D"
