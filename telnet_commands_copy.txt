@@ -4,6 +4,8 @@ send_command 5002:3:1, "'set BCPU_syslog_enabled=ON', $0D"
 send_command 5002:3:1, "$03"
 send_command 5002:3:1, "'bcs', $0D"
 
+send_command 5002:3:1, "$03"
+
 send_command 5002:3:1, "'set BCPU_syslog_server_ip_address=192.168.7.104', $0D"
 send_command 5002:3:1, "'set BCPU_syslog_server_mac_address=f4:6d:04:1b:ba:31', $0D"
 

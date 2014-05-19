@@ -2,7 +2,7 @@
 LOG_FILE = 'yourlogfile.log'
 HOST, PORT = "0.0.0.0", 514
  
-DGX_IP = '192.168.7.92'
+DGX_IP = '192.168.7.172'
 DGX_SYSTEM = '5002:3:0'
 YOUR_MACHINE_IP='192.168.7.104'
 YOUR_MACHINE_MAC='F4:6D:04:1B:BA:31'
@@ -27,6 +27,7 @@ print "set of syslog complete"
 
 print telnet_session.read_very_eager()
 raw_input()
+'''
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'su\', $0D\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'enova\', $0D\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'12amx34\', $0D\" \r') 
@@ -36,7 +37,7 @@ telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'d\', $0D\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'1\', $0D\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'1\', $0D\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'b\', $0D\" \r')
-print telnet_session.read_very_eager()
+print telnet_session.read_very_eager()'''
 
 logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='', filename=LOG_FILE, filemode='a')
  
