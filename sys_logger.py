@@ -11,6 +11,7 @@ YOUR_MACHINE_MAC='F4:6D:04:1B:BA:31'
 import logging
 import SocketServer
 import telnetlib
+import time
 
 
 telnet_session = telnetlib.Telnet(DGX_IP, 23, 5)
@@ -21,9 +22,9 @@ telnet_session.write('send_command ' + DGX_SYSTEM + ', \"$03\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_enabled=ON\', $0D\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_server_ip_address=' + YOUR_MACHINE_IP + '\', $0D\" \r')
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_server_mac_address=' + YOUR_MACHINE_MAC + '\', $0D\" \r')
-print telnet_session.read_until('mac_address', 5)
+#print telnet_session.read_until('mac_address', 5)
 print "set of syslog complete"
-print "move on?", raw_input()
+
 print telnet_session.read_very_eager()
 raw_input()
 telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'su\', $0D\" \r')
@@ -55,5 +56,5 @@ if __name__ == "__main__":
     except (IOError, SystemExit):
         raise
     except KeyboardInterrupt:
-        telnet_session.write('send_command 5002:3:2, \"\'set BCPU_syslog_enabled=OFF\', $0D\" \r')
+        telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_enabled=OFF\', $0D\" \r')
         print ("Crtl+C Pressed. Shutting down debugging.")
