@@ -67,29 +67,13 @@ class MainPanel(wx.Panel):
         self.Centre(wx.BOTH)
         self.SetPosition((0, 0))
 
-        LOG_FILE = 'logfile.log'
-        HOST, PORT = "0.0.0.0", 514
-         
-        DGX_IP = '192.168.7.172'
-        DGX_SYSTEM = '5002:3:0'
-        YOUR_MACHINE_IP='192.168.7.104'
-        YOUR_MACHINE_MAC='F4:6D:04:1B:BA:31'
-        #'5C:26:0A:48:93:7F'
+
 
 
         logging.basicConfig(level=logging.INFO, format='%(message)s', 
                                     datefmt='', filename=LOG_FILE, filemode='a')
 
-        try:
-            server = SocketServer.UDPServer((HOST,PORT), SyslogSocketListen)
-            server.serve_forever(poll_interval=0.5)
-        except (IOError, SystemExit):
-            raise
-        except KeyboardInterrupt:
-            telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_enabled=OFF\', $0D\" \r')
-            print ("Crtl+C Pressed. Shutting down debugging.")
-
-
+       
 
 ########################################################################
 class MainFrame(wx.Frame):
@@ -127,4 +111,23 @@ def main():
 
 # Run the program
 if __name__ == "__main__":
-    main()
+    LOG_FILE = 'logfile.log'
+    HOST, PORT = "0.0.0.0", 514
+     
+    DGX_IP = '192.168.7.172'
+    DGX_SYSTEM = '5002:3:0'
+    YOUR_MACHINE_IP = '192.168.7.104'
+    YOUR_MACHINE_MAC = 'F4:6D:04:1B:BA:31'
+    #'5C:26:0A:48:93:7F'
+    try:
+        syslog_server = SocketServer.UDPServer((HOST,PORT), SyslogSocketListen)
+        syslog_server.serve_forever(poll_interval=0.5)
+        main()
+    except (IOError, SystemExit):
+        raise
+    except KeyboardInterrupt:
+        #telnet_session.write('send_command ' + DGX_SYSTEM + ', \"\'set BCPU_syslog_enabled=OFF\', $0D\" \r')
+        print " Shutting down debugging."
+
+
+
