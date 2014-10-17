@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "DGX Syslogger"
-#define MyAppVersion "v0.0.2"
+#define MyAppVersion "v0.0.3"
 #define MyAppPublisher "Itsmagic Software"
 #define MyAppURL "http://www.ornear.com/dgx_syslogger"
 #define MyAppExeName "dgx_syslogger.exe"
@@ -22,7 +22,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 OutputDir=C:\Users\jim.maciejewski\Documents\dgx_syslog\Output
-OutputBaseFilename=dgx_syslogger_v0.0.2_setup
+OutputBaseFilename=dgx_syslogger_v0.0.3_setup
 Compression=lzma
 SolidCompression=yes
 
