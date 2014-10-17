@@ -38,6 +38,9 @@ class DGXFrame( dgx_gui.DGXFrame ):
         dispatcher.connect(self.incoming_data, 
                            signal="Incoming Data", 
                            sender=dispatcher.Any)
+        dispatcher.connect(self.incoming_error, 
+                           signal="Incoming error", 
+                           sender=dispatcher.Any)
         
 
         #self.window = dgx_gui.ipdialog(self)
@@ -222,19 +225,14 @@ class DGXFrame( dgx_gui.DGXFrame ):
         self.text_area.SetInsertionPointEnd()
         self.text_area.WriteText(sender[1] + "\n")
 
-    def send_BCPU_command(self):
-        #dialog to show 
-        pass
-
-    def setup_syslog(self, _):
-        "Sets up syslog on the DGX"
+    def incoming_error(self, sender):
+        """Print error and exit"""
         dlg = wx.MessageDialog(self.parent,
-           message=('Configure DGX to send syslogs to IP: ' + self.ip_address +
-                    ' and MAC: ' + self.mac_address),
-           caption='Verify IP and MAC',
-           style=wx.OK|wx.CANCEL)
-        if dlg.ShowModal() == wx.ID_OK:
-                self.config_syslog()
+           message=('I\'ve had a probelm: ' + str(sender)),
+           caption='Errors detected',
+           style=wx.OK)
+        dlg.ShowModal()
+        self.Destroy()
 
 
 

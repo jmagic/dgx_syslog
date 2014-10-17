@@ -41,9 +41,11 @@ class SysListener(Thread):
     #----------------------------------------------------------------------
     def run(self):
         """Run Worker Thread."""
-
-        server = SocketServer.UDPServer((self.host, self.port), SyslogUDPHandler)
-        server.serve_forever(poll_interval=0.5)
+        try:
+            server = SocketServer.UDPServer((self.host, self.port), SyslogUDPHandler)
+            server.serve_forever(poll_interval=0.5)
+        except Exception as error:
+            dispatcher.send(signal="Incoming error", sender=(error))
         
         #txtHandler = CustomConsoleHandler(logText)
         #self.logger.addHandler(txtHandler)
