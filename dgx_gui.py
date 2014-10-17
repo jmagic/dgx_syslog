@@ -72,7 +72,7 @@ class DGXFrame ( wx.Frame ):
 class ipdialog ( wx.Dialog ):
 	
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Please enter IP of the DGX", pos = wx.DefaultPosition, size = wx.Size( 275,140 ), style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Please enter IP of the DGX", pos = wx.DefaultPosition, size = wx.Size( 275,130 ), style = wx.DEFAULT_DIALOG_STYLE )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
@@ -82,8 +82,8 @@ class ipdialog ( wx.Dialog ):
 		self.m_staticText1.Wrap( -1 )
 		bSizer3.Add( self.m_staticText1, 0, wx.ALL, 5 )
 		
-		self.m_textCtrl2 = wx.TextCtrl( self, wx.ID_ANY, u"192.168.7.177", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer3.Add( self.m_textCtrl2, 0, wx.ALL|wx.EXPAND, 5 )
+		self.dgx_ip_text = wx.TextCtrl( self, wx.ID_ANY, u"192.168.7.177", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer3.Add( self.dgx_ip_text, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_staticline1 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		bSizer3.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
@@ -99,6 +99,119 @@ class ipdialog ( wx.Dialog ):
 		
 		
 		self.SetSizer( bSizer3 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+	
+	def __del__( self ):
+		pass
+	
+
+###########################################################################
+## Class local_ip_and_mac
+###########################################################################
+
+class local_ip_and_mac ( wx.Dialog ):
+	
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"What is your computers IP and MAC?", pos = wx.DefaultPosition, size = wx.Size( 275,150 ), style = wx.DEFAULT_DIALOG_STYLE )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer4 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer5 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_staticText2 = wx.StaticText( self, wx.ID_ANY, u"Computer's IP", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText2.Wrap( -1 )
+		bSizer5.Add( self.m_staticText2, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		self.computer_ip_text = wx.TextCtrl( self, wx.ID_ANY, u"192.168.7.114", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.computer_ip_text, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		
+		bSizer4.Add( bSizer5, 0, wx.EXPAND, 5 )
+		
+		bSizer7 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticline3 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer7.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
+		
+		
+		bSizer4.Add( bSizer7, 0, wx.EXPAND, 5 )
+		
+		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_staticText3 = wx.StaticText( self, wx.ID_ANY, u"Computer's MAC", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText3.Wrap( -1 )
+		bSizer6.Add( self.m_staticText3, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		self.computer_mac_text = wx.TextCtrl( self, wx.ID_ANY, u"5C:26:0A:48:93:7F", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer6.Add( self.computer_mac_text, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		
+		bSizer4.Add( bSizer6, 0, wx.EXPAND, 5 )
+		
+		bSizer8 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticline4 = wx.StaticLine( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		bSizer8.Add( self.m_staticline4, 0, wx.EXPAND |wx.ALL, 5 )
+		
+		
+		bSizer4.Add( bSizer8, 1, wx.EXPAND, 5 )
+		
+		m_sdbSizer2 = wx.StdDialogButtonSizer()
+		self.m_sdbSizer2OK = wx.Button( self, wx.ID_OK )
+		m_sdbSizer2.AddButton( self.m_sdbSizer2OK )
+		self.m_sdbSizer2Cancel = wx.Button( self, wx.ID_CANCEL )
+		m_sdbSizer2.AddButton( self.m_sdbSizer2Cancel )
+		m_sdbSizer2.Realize();
+		
+		bSizer4.Add( m_sdbSizer2, 1, wx.EXPAND, 5 )
+		
+		
+		self.SetSizer( bSizer4 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+	
+	def __del__( self ):
+		pass
+	
+
+###########################################################################
+## Class connection_progress
+###########################################################################
+
+class connection_progress ( wx.Dialog ):
+	
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Progress", pos = wx.DefaultPosition, size = wx.Size( 300,100 ), style = wx.DEFAULT_DIALOG_STYLE )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer9 = wx.BoxSizer( wx.VERTICAL )
+		
+		bSizer10 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.progress_text = wx.StaticText( self, wx.ID_ANY, u"Setting server MAC to 00:00:00:00:00:00", wx.DefaultPosition, wx.Size( -1,-1 ), wx.ALIGN_CENTRE )
+		self.progress_text.Wrap( -1 )
+		bSizer10.Add( self.progress_text, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+		
+		
+		bSizer9.Add( bSizer10, 1, wx.EXPAND|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
+		bSizer11 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.progress_bar = wx.Gauge( self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
+		self.progress_bar.SetValue( 0 ) 
+		bSizer11.Add( self.progress_bar, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+		
+		
+		bSizer9.Add( bSizer11, 1, wx.EXPAND, 5 )
+		
+		
+		self.SetSizer( bSizer9 )
 		self.Layout()
 		
 		self.Centre( wx.BOTH )

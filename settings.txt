@@ -1,0 +1,5 @@
+[Settings]
+computer ip = 192.168.7.114
+computer mac = 5C:26:0A:48:93:7F
+dgx ip = 192.168.7.177
+
